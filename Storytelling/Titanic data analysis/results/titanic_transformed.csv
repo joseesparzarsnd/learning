@@ -1,0 +1,5 @@
+Count of Survived,Column Labels,,,,,,Count of Survived,Column Labels,,,,,,,Count of Survived,Column Labels,,,,
+Row Labels,female,male,Grand Total,,,,Row Labels,1,2,3,Grand Total,,,,Row Labels,Adults,Elders,Infants/children,Teenagers,Grand Total
+Died,16,86,102,,,,Died,18,16,68,102,,,,Died,77,4,8,13,102
+Survived,40,14,54,,,,Survived,12,14,28,54,,,,Survived,42,,4,8,54
+Grand Total,56,100,156,,,,Grand Total,30,30,96,156,,,,Grand Total,119,4,12,21,156
