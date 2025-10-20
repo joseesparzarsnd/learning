@@ -1,0 +1,6 @@
+producto_id,nombre,categoria,precio
+1,Producto A,Electronica,100
+2,Producto B,Electronica,150
+3,Producto C,Ropa,50
+4,Producto D,Ropa,80
+5,Producto E,Hogar,120

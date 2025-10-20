@@ -1,0 +1,11 @@
+,producto_id,cantidad,fecha_venta,nombre,categoria,precio,ingresos,num_ventas,año_venta
+0,1,10,2023-01-10,Producto A,Electronica,100,1000,1,2023
+1,1,6,2024-01-12,Producto A,Electronica,100,600,1,2024
+2,2,5,2023-02-15,Producto B,Electronica,150,750,1,2023
+3,2,4,2024-02-18,Producto B,Electronica,150,600,1,2024
+4,3,8,2023-03-20,Producto C,Ropa,50,400,1,2023
+5,3,9,2024-03-22,Producto C,Ropa,50,450,1,2024
+6,4,3,2023-04-25,Producto D,Ropa,80,240,1,2023
+7,4,2,2024-04-28,Producto D,Ropa,80,160,1,2024
+8,5,7,2023-05-30,Producto E,Hogar,120,840,1,2023
+9,5,8,2024-05-31,Producto E,Hogar,120,960,1,2024
