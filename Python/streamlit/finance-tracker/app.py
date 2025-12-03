@@ -1,6 +1,41 @@
 import streamlit as st
 import pandas as pd
 from typing import List, Dict, Any
+import functions as udfs
+
+pg = st.navigation(udfs.setNavigation())
+pg.run()
+
+def init() -> None:
+    columns: List[str] = ["id", "date", "category", "subcategory", "description", "amount", "type", "isTransfer", "from", "to"]
+
+    if "df" not in st.session_state:
+        st.session_state.df = pd.DataFrame(columns = columns)
+    if "counter" not in st.session_state:
+        st.session_state.counter = 0
+
+def submit() -> None:
+    new_transaction: List[int | str | float | None | bool] = [
+        len(st.session_state.df) + 1,
+        transaction_date,
+        category,
+        subcategory,
+        description,
+        amount,
+        type,
+        is_transaction,
+        from_account,
+        to
+    ]
+    st.session_state.df.loc[len(st.session_state.df)] = new_transaction
+    st.session_state.counter += 1
+    print("Total rows: ", st.session_state.counter)
+
+def draw() -> None:
+    st.write(st.session_state.df)
+
+
+init()
 
 categories: List[str] = ["Food", "Transport", "Entertainment", "Apparel", "Services", "Health", "Pets", "Other"]
 
@@ -15,35 +50,18 @@ subcategories: Dict[str, List[str]] = {
     "Other": ["Payroll reception", "Deposits", "Money reception", "Other"]
 }
 
-df: pd.DataFrame = pd.DataFrame(
-    columns = ["id", "date", "category", "subcategory", "description", "amount", "type", "isTransfer", "from", "to"]
-)
+with st.container(key = "insert-row-form", border = True):
+    page_title: str = st.header("Finance tracker")
+    transaction_date: str = st.date_input("Date", value = None)
+    category: str = st.selectbox("Category", categories)
+    subcategory: str = st.selectbox("Subcategory", subcategories[category])
+    description: str = st.text_input("Description")
+    amount: float = st.number_input("Amount", value = 0.0)
+    type: str = st.selectbox("Type", ["Expense", "Income"])
+    is_transaction: bool = st.checkbox("Is this a money transfer?", value = False)
+    from_account: str = st.text_input("Source")
+    to: str | None = st.text_input("Destination") if is_transaction else None 
+ 
+    submitted: bool = st.button("Add transaction", on_click = submit)
 
-page_title: str = st.header("Finance tracker")
-transaction_date: str = st.date_input("Date", value = None)
-category: str = st.selectbox("Category", categories)
-subcategory: str = st.selectbox("Subcategory", subcategories[category])
-description: str = st.text_input("Description")
-amount: float = st.number_input("Amount", value = 0.0)
-type: str = st.selectbox("Type", ["Expense", "Income"])
-is_transaction: bool = st.checkbox("Is this a money transfer?", value = False)
-from_account: str = st.text_input("Source")
-to: str | None = st.text_input("Destination") if is_transaction else None
-
-submitted: bool = st.form_submit_button("Add transaction")
-
-if submitted:
-    new_transaction: pd.DataFrame = pd.DataFrame({
-        "id": len(df.index) + 1,
-        "date": transaction_date,
-        "category": category,
-        "subcategory": subcategory,
-        "description": description,
-        "amount": amount,
-        "type": type,
-        "isTransfer": is_transaction,
-        "from": from_account,
-        "to": to
-    })
-    df = pd.concat([df, new_transaction], ignore_index = True)
-    st.write(df)
+draw()
